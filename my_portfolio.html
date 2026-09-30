@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Joshitha | Profile</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            min-height: 100vh;
+            color: #ffffff;
+            background: #08090d;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #6c5ce7;
+            filter: blur(180px);
+            opacity: 0.25;
+            top: -200px;
+            left: -150px;
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #00cec9;
+            filter: blur(180px);
+            opacity: 0.15;
+            bottom: -200px;
+            right: -150px;
+            z-index: -2;
+        }
+
+        /* Main container */
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            padding: 35px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile {
+            width: 1100px;
+            max-width: 100%;
+            background: rgba(255, 255, 255, 0.055);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 32px;
+            padding: 45px;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.45);
+        }
+
+        /* Top */
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 55px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #b8b8c5;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #00e676;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #00e676;
+        }
+
+        /* Hero */
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .photo {
+            width: 280px;
+            height: 280px;
+            margin: auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6c5ce7, #00cec9);
+            padding: 4px;
+            box-shadow: 0 0 60px rgba(108,92,231,0.25);
+        }
+
+        .photo-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #15161d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: 700;
+        }
+
+        .intro small {
+            color: #aaaaba;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .intro h1 {
+            font-size: clamp(50px, 8vw, 85px);
+            line-height: 0.95;
+            margin: 18px 0;
+            letter-spacing: -4px;
+        }
+
+        .intro h1 span {
+            background: linear-gradient(90deg, #a29bfe, #81ecec);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .intro h2 {
+            font-size: 21px;
+            font-weight: 400;
+            color: #c4c4cf;
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            color: #9696a5;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* Information */
+
+        .info {
+            margin-top: 55px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .info-box {
+            padding: 22px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .info-box span {
+            display: block;
+            font-size: 12px;
+            color: #777789;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+        }
+
+        .info-box strong {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* Divider */
+
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 45px 0;
+        }
+
+        /* Lower content */
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .heading {
+            font-size: 14px;
+            color: #8e8e9e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .education h3 {
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .education p {
+            color: #9b9baa;
+            line-height: 1.7;
+        }
+
+        /* Skills */
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            padding: 10px 16px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #d5d5df;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        /* Hobbies */
+
+        .hobbies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hobby {
+            color: #c8c8d2;
+            font-size: 14px;
+        }
+
+        .hobby:not(:last-child)::after {
+            content: "  •  ";
+            color: #555565;
+            margin-left: 8px;
+        }
+
+        /* Contact */
+
+        .contact {
+            margin-top: 45px;
+            padding: 28px;
+            border-radius: 20px;
+            background: linear-gradient(
+                135deg,
+                rgba(108,92,231,0.14),
+                rgba(0,206,201,0.06)
+            );
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contact h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .contact p {
+            color: #9292a2;
+            font-size: 14px;
+        }
+
+        .button {
+            padding: 13px 22px;
+            border-radius: 30px;
+            background: #ffffff;
+            color: #111217;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.15);
+        }
+
+        /* Footer */
+
+        .footer {
+            margin-top: 35px;
+            text-align: center;
+            color: #5f5f6d;
+            font-size: 12px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 800px) {
+
+            .page {
+                padding: 15px;
+            }
+
+            .profile {
+                padding: 28px 22px;
+                border-radius: 25px;
+            }
+
+            .top {
+                margin-bottom: 40px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 35px;
+            }
+
+            .photo {
+                width: 190px;
+                height: 190px;
+            }
+
+            .photo-inner {
+                font-size: 70px;
+            }
+
+            .intro h1 {
+                font-size: 55px;
+                letter-spacing: -3px;
+            }
+
+            .intro p {
+                margin: auto;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .contact {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .status {
+                font-size: 11px;
+            }
+
+            .intro h1 {
+                font-size: 48px;
+            }
+
+            .intro h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <main class="profile">
+
+        <!-- Header -->
+
+        <div class="top">
+
+            <div class="logo">
+                Joshitha
+            </div>
+
+            <div class="status">
+                <span class="dot"></span>
+                Open to learning
+            </div>
+
+        </div>
+
+
+        <!-- Main Profile -->
+
+        <div class="hero">
+
+            <div class="photo">
+                <div class="photo-inner">
+                    J
+                </div>
+            </div>
+
+
+            <div class="intro">
+
+                <small>Personal Profile</small>
+
+                <h1>
+                    Hi, I'm<br>
+                    <span>Joshitha</span>
+                </h1>
+
+                <h2>
+                    B.Tech Student · Future Engineer
+                </h2>
+
+                <p>
+                    I’m a B.Tech student at Mallareddy Deemed University,
+                    passionate about learning, creativity and discovering
+                    new opportunities. I believe every day is a chance
+                    to learn something new and become a better version
+                    of myself.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Basic Information -->
+
+        <div class="info">
+
+            <div class="info-box">
+                <span>College</span>
+                <strong>Mallareddy Deemed University</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Education</span>
+                <strong>B.Tech</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Location</span>
+                <strong>hydrabad</strong>
+            </div>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <!-- Details -->
+
+        <div class="content">
+
+            <div class="education">
+
+                <div class="heading">
+                    Education & Career
+                </div>
+
+                <h3>
+                    B.Tech Student
+                </h3>
+
+                <p>
+                    Currently pursuing my Bachelor of Technology
+                    at Mallareddy Deemed University with the goal
+                    of developing strong technical and professional
+                    skills for my future career.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <div class="heading">
+                    Skills
+                </div>
+
+                <div class="skills">
+
+                    <div class="skill">Engineering</div>
+                    <div class="skill">Problem Solving</div>
+                    <div class="skill">Communication</div>
+                    <div class="skill">Teamwork</div>
+                    <div class="skill">Creative Thinking</div>
+                    <div class="skill">Learning</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <!-- Hobbies -->
+
+        <div>
+
+            <div class="heading">
+                Things I Enjoy
+            </div>
+
+            <div class="hobbies">
+
+                <div class="hobby">Dancing</div>
+                <div class="hobby">training for AI Engineer</div>
+                <div class="hobby">Reading Books</div>
+                <div class="hobby">researching</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Contact -->
+
+        <div class="contact">
+
+            <div>
+                <h3>
+                    Let's connect.
+                </h3>
+
+                <p>
+                    Phone · 1234567891
+                </p>
+            </div>
+
+            <a href="tel:1234567891" class="button">
+                Contact Me →
+            </a>
+
+        </div>
+
+
+        <div class="footer">
+            © <span id="year"></span> Josita · Personal Profile
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    // Current year
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+    // Small entrance animation
+    const profile = document.querySelector(".profile");
+
+    profile.style.opacity = "0";
+    profile.style.transform = "translateY(20px)";
+
+    setTimeout(() => {
+        profile.style.transition = "all 0.8s ease";
+        profile.style.opacity = "1";
+        profile.style.transform = "translateY(0)";
+    }, 100);
+
+</script>
+
+</body>
+</html>
